@@ -79,6 +79,10 @@ table td, table th {
   padding: 5px;
 }
 
+table td:hover, table th:hover {
+  background-color: lightgreen;
+}
+
 table thead {
   background-color: #84BD04;
 }

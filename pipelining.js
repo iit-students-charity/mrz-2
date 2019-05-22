@@ -24,11 +24,15 @@ $(document).ready(() => {
       sizeE = $('#e-size').val(),
       sizeG = $('#g-size').val()
     if (!sizeA || !sizeB || !sizeE || !sizeG) {
-      alert('Введите все размеры')
+      alert('Input all sizes')
       return
     }
     createMatrices(sizeA, sizeB, sizeE, sizeG)
     drawMatrices()
+  })
+
+  $('#calculate-button').on('click', () => {
+
   })
 
   function createMatrices(sizeA, sizeB, sizeE, sizeG) {
