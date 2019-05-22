@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pipelining</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="pipelining.js"></script>
+  </head>
+  <body>
+    <div class="inputs">
+      <div>
+        <label for="a-size" id="a-size-label">A size:</label>
+        <input type="text" id="a-size">
+      </div>
+      <div>
+        <label for="b-size" id="b-size-label">B size:</label>
+        <input type="text" id="b-size">
+      </div>
+      <div>
+        <label for="e-size" id="e-size-label">E size:</label>
+        <input type="text" id="e-size">
+      </div>
+      <div>
+        <label for="g-size" id="g-size-label">G size:</label>
+        <input type="text" id="g-size">
+      </div>
+      <button id="regenerate-button">Regenerate</button>
+      <button id="calculate-button">Calculate</button>
+    </div>
+
+    <div class="columns">
+      <div class="matrices">
+        <label for="a-matrix" id="a-size-label" class="hidden">A:</label>
+        <table id="a-matrix"></table>
+        <label for="b-matrix" id="b-size-label" class="hidden">B:</label>
+        <table id="b-matrix"></table>
+        <label for="e-matrix" id="e-size-label" class="hidden">E:</label>
+        <table id="e-matrix"></table>
+        <label for="g-matrix" id="g-size-label" class="hidden">G:</label>
+        <table id="g-matrix"></table>
+      </div>
+
+      <div class="results">
+        <table class="f-matrix"></table>
+        <table class="d-matrix"></table>
+        <table class="c-matrix"></table>
+      </div>
+    </div>
+  </body>
+</html>
