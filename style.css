@@ -4,6 +4,7 @@ body {
 }
 
 input {
+  width: 100px;
   margin: 5px;
   padding: 5px;
   font-size: 16px;

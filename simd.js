@@ -14,39 +14,37 @@ $(document).ready(() => {
   matrixG = []
   matrixF = []
   matrixD = []
+  sizeP = 3
+  sizeM = 3
+  sizeQ = 3
 
-  createMatrices(3, 3, 3, 3)
+  createMatrices()
   drawMatrices()
 
-  $('#regenerate-button').on('click', () => {
-    let sizeA = $('#a-size').val(),
-      sizeB = $('#b-size').val(),
-      sizeE = $('#e-size').val(),
-      sizeG = $('#g-size').val()
-    if (!sizeA || !sizeB || !sizeE || !sizeG) {
+  $('#run-button').on('click', () => {
+      sizeP = $('#p-size').val()
+      sizeM = $('#m-size').val()
+      sizeQ = $('#q-size').val()
+    if (!sizeP || !sizeM || !sizeQ) {
       alert('Input all sizes')
       return
     }
-    createMatrices(sizeA, sizeB, sizeE, sizeG)
+    createMatrices(sizeP, sizeM, sizeQ)
     drawMatrices()
   })
 
-  $('#calculate-button').on('click', () => {
-
-  })
-
-  function createMatrices(sizeA, sizeB, sizeE, sizeG) {
-    matrixA = createMatrix(sizeA)
-    matrixB = createMatrix(sizeB)
-    matrixE = createMatrix(sizeE)
-    matrixG = createMatrix(sizeG)
+  function createMatrices() {
+    matrixA = createMatrix(sizeP, sizeM)
+    matrixB = createMatrix(sizeM, sizeQ)
+    matrixE = createMatrix(1, sizeM)
+    matrixG = createMatrix(sizeP, sizeQ)
   }
 
-  function createMatrix(size) {
+  function createMatrix(firstSize, secondSize) {
     var tempArray, matrix = []
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < firstSize; i++) {
       tempArray = []
-      for (let i = 0; i < size; i++) {
+      for (let i = 0; i < secondSize; i++) {
         tempArray.push(Math.random().toFixed(3))
       }
       matrix.push(tempArray)
@@ -73,5 +71,9 @@ $(document).ready(() => {
         row.append('<td>' + number + '</td>')
       })
     })
+  }
+
+  function impl(first, second) {
+
   }
 })
