@@ -8,42 +8,56 @@
 */
 
 $(document).ready(() => {
-  matrixA = []
-  matrixB = []
-  matrixE = []
-  matrixG = []
-  matrixF = []
-  matrixD = []
-  matrixC = []
+  a = []
+  b = []
+  e = []
+  g = []
+  f = []
+  d = []
+  c = []
   sizeP = 3
   sizeM = 3
   sizeQ = 3
+  nValue = 1
+  multiplicationTime = 1
+  divisionTime = 1
+  additionTime = 1
+  subtractionTime = 1
+  comparisonTime = 1
 
   generateMatrices()
   calculate()
   drawMatrices()
 
   $('#run-button').on('click', () => {
-      sizeP = $('#p-size').val()
-      sizeM = $('#m-size').val()
-      sizeQ = $('#q-size').val()
+    sizeP = $('#p-size').val()
+    sizeM = $('#m-size').val()
+    sizeQ = $('#q-size').val()
+    nValue = $('#n-value').val()
+    multiplicationTime = $('#multiplication-time').val()
+    divisionTime = $('#division-time').val()
+    additionTime = $('#addition-time').val()
+    subtractionTime = $('#subtraction-time').val()
+    comparisonTime = $('#comparison-time').val()
+
     if (!sizeP || !sizeM || !sizeQ) {
       alert('Input all sizes')
       return
     }
-    generateMatrices(sizeP, sizeM, sizeQ)
+
+    generateMatrices()
     calculate()
     drawMatrices()
   })
 
   function generateMatrices() {
-    matrixA = generateMatrix(sizeP, sizeM)
-    matrixB = generateMatrix(sizeM, sizeQ)
-    matrixE = generateMatrix(1, sizeM)
-    matrixG = generateMatrix(sizeP, sizeQ)
-    matrixD = generateEmptyMatrix()
-    matrixF = generateEmptyMatrix()
-    matrixC = generateEmptyMatrix()
+    a = generateMatrix(sizeP, sizeM)
+    b = generateMatrix(sizeM, sizeQ)
+    e = generateMatrix(1, sizeM)
+    g = generateMatrix(sizeP, sizeQ)
+    d = generateEmptyMatrix()
+    f = generateEmptyMatrix()
+    c = generateEmptyMatrix()
   }
 
   function generateMatrix(firstSize, secondSize) {
@@ -73,14 +87,14 @@ $(document).ready(() => {
   }
 
   function drawMatrices() {
-    $('.matrices').children('table').each((_, table) => {
+    $('.matrices, .results').children('table').each((_, table) => {
       $(table).empty()
     })
-    drawMatrix(matrixA, $('#a-matrix'))
-    drawMatrix(matrixB, $('#b-matrix'))
-    drawMatrix(matrixE, $('#e-matrix'))
-    drawMatrix(matrixG, $('#g-matrix'))
-    drawMatrix(matrixC, $('#c-matrix'))
+    drawMatrix(a, $('#a-matrix'))
+    drawMatrix(b, $('#b-matrix'))
+    drawMatrix(e, $('#e-matrix'))
+    drawMatrix(g, $('#g-matrix'))
+    drawMatrix(c, $('#c-matrix'))
   }
 
   function drawMatrix(matrix, table) {
@@ -134,14 +148,14 @@ $(document).ready(() => {
   }
 
   function calculateF() {
-    for (var i = 0; i < sizeP; i++) {
-      for (var j = 0; j < sizeQ; j++) {
+    for (var i = 0; i < sizeQ; i++) {
+      for (var j = 0; j < sizeP; j++) {
         for (var k = 0; k < sizeM; k++) {
-          matrixF[i][j][k] = (
-            implication(matrixA[i][k], matrixB[k][j]) * (2 * matrixE[0][k] - 1) * matrixE[0][k] +
-            implication(matrixB[k][j], matrixA[i][k]) * (
-              1 + (4 * implication(matrixA[i][k], matrixB[k][j]) - 2) * matrixE[0][k]
-            ) * (1 - matrixE[0][k])
+          f[i][j][k] = (
+            implication(a[i][k], b[k][j]) * (2 * e[0][k] - 1) * e[0][k] +
+            implication(b[k][j], a[i][k]) * (
+              1 + (4 * implication(a[i][k], b[k][j]) - 2) * e[0][k]
+            ) * (1 - e[0][k])
           ).toFixed(3)
         }
       }
@@ -149,23 +163,23 @@ $(document).ready(() => {
   }
 
   function calculateD() {
-    for (var i = 0; i < sizeP; i++) {
-      for (var j = 0; j < sizeQ; j++) {
+    for (var i = 0; i < sizeQ; i++) {
+      for (var j = 0; j < sizeP; j++) {
         for (var k = 0; k < sizeM; k++) {
-          matrixD[i][j][k] = conjunction(matrixA[i][k], matrixB[k][j]).toFixed(3)
+          d[i][j][k] = conjunction(a[i][k], b[k][j]).toFixed(3)
         }
       }
     }
   }
 
   function calculateC() {
-    for (var i = 0; i < sizeP; i++) {
-      for (var j = 0; j < sizeQ; j++) {
-        matrixC[i][j] = (
-          singleConjunction(matrixF[i][j]) * (3 * matrixG[i][j] - 2) * matrixG[i][j] + (
-            singleDisjunction(matrixD[i][j]) + (4 * (multiplication(matrixF[i][j], matrixD[i][j]) - 3 *
-            singleDisjunction(matrixD[i][j])) * matrixG[i][j])
-          ) * (1 - matrixG[i][j])
+    for (var i = 0; i < sizeQ; i++) {
+      for (var j = 0; j < sizeP; j++) {
+        c[i][j] = (
+          singleConjunction(f[i][j]) * (3 * g[i][j] - 2) * g[i][j] + (
+            singleDisjunction(d[i][j]) + (4 * (multiplication(f[i][j], d[i][j]) - 3 *
+            singleDisjunction(d[i][j])) * g[i][j])
+          ) * (1 - g[i][j])
         ).toFixed(3)
       }
     }

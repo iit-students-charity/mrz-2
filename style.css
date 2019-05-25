@@ -96,3 +96,17 @@ table thead {
   display: flex;
   justify-content: space-around;
 }
+
+.inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.inputs-container {
+  text-align: right;
+  margin-right: 10px;
+}
+
+.inputs-label {
+
+}
