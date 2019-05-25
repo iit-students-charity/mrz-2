@@ -10,36 +10,44 @@
   <body>
     <div class="inputs">
       <div>
-        <label for="p-size" id="p-size-label">p:</label>
+        <label for="p-size">p:</label>
         <input type="text" id="p-size">
       </div>
       <div>
-        <label for="m-size" id="m-size-label">m:</label>
+        <label for="m-size">m:</label>
         <input type="text" id="m-size">
       </div>
       <div>
-        <label for="q-size" id="q-size-label">q:</label>
+        <label for="q-size">q:</label>
         <input type="text" id="q-size">
       </div>
+      <div>
+        <label for="n-value">n</label>:</label>
+        <input type="text" id="n-value">
+      </div>
+      <div>
+        <label for="t-value">t:</label>
+        <input type="text" id="t-value">
+      </div>
+
       <button id="run-button">Regenerate and calculate</button>
     </div>
 
     <div class="columns">
       <div class="matrices">
-        <label for="a-matrix" id="a-size-label" class="hidden">A:</label>
+        <label for="a-matrix" class="hidden">A:</label>
         <table id="a-matrix"></table>
-        <label for="b-matrix" id="b-size-label" class="hidden">B:</label>
+        <label for="b-matrix" class="hidden">B:</label>
         <table id="b-matrix"></table>
-        <label for="e-matrix" id="e-size-label" class="hidden">E:</label>
+        <label for="e-matrix" class="hidden">E:</label>
         <table id="e-matrix"></table>
-        <label for="g-matrix" id="g-size-label" class="hidden">G:</label>
+        <label for="g-matrix" class="hidden">G:</label>
         <table id="g-matrix"></table>
       </div>
 
       <div class="results">
-        <table class="f-matrix"></table>
-        <table class="d-matrix"></table>
-        <table class="c-matrix"></table>
+        <table for="c-matrix">C:</table>
+        <table id="c-matrix"></table>
       </div>
     </div>
   </body>
