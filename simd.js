@@ -8,26 +8,19 @@
 */
 
 $(document).ready(() => {
-  a = []
-  b = []
-  e = []
-  g = []
-  f = []
-  d = []
-  c = []
-  sizeP = 3
-  sizeM = 3
-  sizeQ = 3
-  nValue = 1
-  multiplicationTime = 1
-  divisionTime = 1
-  additionTime = 1
-  subtractionTime = 1
-  comparisonTime = 1
+  var a, b, e, g, f, d, c,
+    sizeP = 3,
+    sizeM = 3,
+    sizeQ = 3,
+    nValue = 1,
+    multiplicationTime = 1,
+    additionTime = 1,
+    subtractionTime = 1,
+    comparisonTime = 1
 
-  generateMatrices()
+  generate()
   calculate()
-  drawMatrices()
+  draw()
 
   $('#run-button').on('click', () => {
     sizeP = $('#p-size').val()
@@ -45,12 +38,12 @@ $(document).ready(() => {
       return
     }
 
-    generateMatrices()
+    generate()
     calculate()
-    drawMatrices()
+    draw()
   })
 
-  function generateMatrices() {
+  function generate() {
     a = generateMatrix(sizeP, sizeM)
     b = generateMatrix(sizeM, sizeQ)
     e = generateMatrix(1, sizeM)
@@ -86,7 +79,7 @@ $(document).ready(() => {
     return matrix
   }
 
-  function drawMatrices() {
+  function draw() {
     $('.matrices, .results').children('table').each((_, table) => {
       $(table).empty()
     })
@@ -95,6 +88,10 @@ $(document).ready(() => {
     drawMatrix(e, $('#e-matrix'))
     drawMatrix(g, $('#g-matrix'))
     drawMatrix(c, $('#c-matrix'))
+    $('#result-multiplication-time').text(numberOfMultiplications() * multiplicationTime)
+    $('#result-addition-time').text(numberOfAdditions() * additionTime)
+    $('#result-subtraction-time').text(numberOfSubtractions() * subtractionTime)
+    $('#result-comparison-time').text(numberOfComparisons() * comparisonTime)
   }
 
   function drawMatrix(matrix, table) {
@@ -183,5 +180,21 @@ $(document).ready(() => {
         ).toFixed(3)
       }
     }
+  }
+
+  function numberOfMultiplications() {
+    return (13 + 3 * sizeM) * sizeP * sizeQ
+  }
+
+  function numberOfAdditions() {
+    return 6 * sizeP * sizeQ
+  }
+
+  function numberOfSubtractions() {
+    return (9 + sizeM) * sizeP * sizeQ
+  }
+
+  function numberOfComparisons() {
+    return (12 + sizeM) * sizeP * sizeQ
   }
 })

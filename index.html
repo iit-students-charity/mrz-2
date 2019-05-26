@@ -35,10 +35,6 @@
           <input type="text" id="multiplication-time">
         </div>
         <div>
-          <label for="division-time">/</label>
-          <input type="text" id="division-time">
-        </div>
-        <div>
           <label for="addition-time">+</label>
           <input type="text" id="addition-time">
         </div>
@@ -47,7 +43,7 @@
           <input type="text" id="subtraction-time">
         </div>
         <div>
-          <label for="comparison-time"><></label>
+          <label for="comparison-time"><=></label>
           <input type="text" id="comparison-time">
         </div>
       </div>
@@ -69,6 +65,20 @@
       <div class="results">
         <table for="c-matrix">C:</table>
         <table id="c-matrix"></table>
+        <div class="output-container">
+          <div>
+            <span class="sign">*</span><span id="result-multiplication-time"></span>
+          </div>
+          <div>
+            <span class="sign">+</span><span id="result-addition-time"></span>
+          </div>
+          <div>
+            <span class="sign">-</span><span id="result-subtraction-time"></span>
+          </div>
+          <div>
+            <span class="sign"><=></span><span id="result-comparison-time"></span>
+          </div>
+        </div>
       </div>
     </div>
   </body>

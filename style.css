@@ -107,6 +107,11 @@ table thead {
   margin-right: 10px;
 }
 
-.inputs-label {
+.sign {
+  margin-right: 7px;
+}
 
+.output-container {
+  margin: 10px;
+  text-align: left;
 }
