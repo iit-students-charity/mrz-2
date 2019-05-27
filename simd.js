@@ -80,9 +80,11 @@ $(document).ready(() => {
   }
 
   function draw() {
-    $('.matrices, .results').children('table').each((_, table) => {
+    $('.matrices').children('table').each((_, table) => {
       $(table).empty()
     })
+    $('#c-matrix').empty()
+
     drawMatrix(a, $('#a-matrix'))
     drawMatrix(b, $('#b-matrix'))
     drawMatrix(e, $('#e-matrix'))
@@ -92,6 +94,12 @@ $(document).ready(() => {
     $('#result-addition-time').text(numberOfAdditions() * additionTime)
     $('#result-subtraction-time').text(numberOfSubtractions() * subtractionTime)
     $('#result-comparison-time').text(numberOfComparisons() * comparisonTime)
+    $('#result-rang').text(sizeM * sizeP * sizeQ)
+    let fullTime = numberOfMultiplications() * multiplicationTime + numberOfAdditions() * additionTime +
+      numberOfSubtractions() * subtractionTime + numberOfComparisons() * comparisonTime
+    $('#result-consistent-time').text(fullTime)
+    $('#result-parallel-time').text()
+
   }
 
   function drawMatrix(matrix, table) {
