@@ -116,6 +116,10 @@ table thead {
   text-align: left;
 }
 
+.results {
+  text-align: -webkit-center;
+}
+
 #time-results {
   display: inline-table;
 }
