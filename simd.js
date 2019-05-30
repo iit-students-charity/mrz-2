@@ -12,7 +12,7 @@ $(document).ready(() => {
     sizeP = 3,
     sizeM = 3,
     sizeQ = 3,
-    nValue = 1,
+    nValue = 2,
     rang = 9,
     multiplicationTime = 1,
     additionTime = 1,
@@ -26,7 +26,8 @@ $(document).ready(() => {
     numberOfParallelAdditions = 0,
     numberOfParallelSubtractions = 0,
     consistentTime = 0,
-    parallelTime = 0
+    parallelTime = 0,
+    averageTime = 0
 
   google.charts.load('current', {packages: ['corechart', 'line']})
   google.charts.setOnLoadCallback(drawGraphics)
@@ -38,15 +39,15 @@ $(document).ready(() => {
   $('#run-button').on('click', () => {
     if (!validate()) return
 
-    sizeP = $('#p-size').val()
-    sizeM = $('#m-size').val()
-    sizeQ = $('#q-size').val()
-    nValue = $('#n-value').val()
-    multiplicationTime = $('#multiplication-time').val()
-    divisionTime = $('#division-time').val()
-    additionTime = $('#addition-time').val()
-    subtractionTime = $('#subtraction-time').val()
-    comparisonTime = $('#comparison-time').val()
+    sizeP = parseInt($('#p-size').val())
+    sizeM = parseInt($('#m-size').val())
+    sizeQ = parseInt($('#q-size').val())
+    nValue = parseInt($('#n-value').val())
+    multiplicationTime = parseInt($('#multiplication-time').val())
+    divisionTime = parseInt($('#division-time').val())
+    additionTime = parseInt($('#addition-time').val())
+    subtractionTime = parseInt($('#subtraction-time').val())
+    comparisonTime = parseInt($('#comparison-time').val())
 
     calculate()
     draw()
@@ -66,7 +67,7 @@ $(document).ready(() => {
     $('#p-size').val('3')
     $('#m-size').val('3')
     $('#q-size').val('3')
-    $('#n-value').val('1')
+    $('#n-value').val('2')
     $('#multiplication-time').val('1')
     $('#division-time').val('1')
     $('#addition-time').val('1')
@@ -122,18 +123,21 @@ $(document).ready(() => {
     drawMatrix(g, $('#g-matrix'))
     drawMatrix(c, $('#c-matrix'))
 
+    let averageLength = Math.ceil(averageTime / rang)
+
     $('#result-multiplication-time').text(numberOfMultiplications * multiplicationTime)
-    $('#result-addition-time').text(numberOfAdditions * additionTime)
+    $('#result-addition-time').text(numberOfAdditions * additi
+      onTime)
     $('#result-subtraction-time').text(numberOfSubtractions * subtractionTime)
     $('#result-comparison-time').text(numberOfComparisons * comparisonTime)
-    $('#result-acceleration-factor').text(accelerationFactor)
-    $('#result-efficiency').text(efficiency)
+    $('#result-acceleration-factor').text(accelerationFactor.toFixed(3))
+    $('#result-efficiency').text(efficiency.toFixed(3))
     $('#result-rang').text(rang)
     $('#result-parallel-time').text(parallelTime)
     $('#result-consistent-time').text(consistentTime)
     $('#result-total-length').text(parallelTime)
-    $('#result-average-length').text(Math.ceil(parallelTime / rang))
-    $('#result-discrepancy').text(rang)
+    $('#result-average-length').text(averageLength)
+    $('#result-discrepancy').text((parallelTime / averageLength).toFixed(3))
   }
 
   function drawMatrix(matrix, table) {
@@ -207,6 +211,9 @@ $(document).ready(() => {
     numberOfParallelMultiplications = 0
     numberOfParallelAdditions = 0
     numberOfParallelSubtractions = 0
+    parallelTime = 0
+    consistentTime = 0
+    averageTime = 0
 
     generate()
     calculateF()
@@ -217,10 +224,6 @@ $(document).ready(() => {
     consistentTime = numberOfMultiplications * multiplicationTime + numberOfAdditions * additionTime +
       numberOfSubtractions * subtractionTime + numberOfComparisons * comparisonTime + numberOfParallelMultiplications *
       multiplicationTime + numberOfParallelAdditions * additionTime + numberOfParallelSubtractions * subtractionTime
-    parallelTime = numberOfMultiplications * multiplicationTime + numberOfAdditions * additionTime +
-      numberOfSubtractions * subtractionTime + numberOfComparisons * comparisonTime + (numberOfParallelMultiplications
-      * multiplicationTime + numberOfParallelAdditions * additionTime + numberOfParallelSubtractions * subtractionTime)
-      / nValue
     accelerationFactor = consistentTime / parallelTime
     efficiency = consistentTime / (parallelTime * nValue)
   }
@@ -241,6 +244,10 @@ $(document).ready(() => {
         }
       }
     }
+    parallelTime += Math.ceil((sizeP * sizeQ * sizeM) / nValue) * (7 * multiplicationTime + 2 * additionTime + 3 *
+      subtractionTime + 3 * (2 * comparisonTime + subtractionTime))
+    averageTime += sizeP * sizeQ * sizeM * (7 * multiplicationTime + 2 * additionTime + 3 *
+      subtractionTime + 3 * (2 * comparisonTime + subtractionTime))
   }
 
   function calculateD() {
@@ -251,6 +258,8 @@ $(document).ready(() => {
         }
       }
     }
+    parallelTime += Math.ceil((sizeP * sizeQ * sizeM) / nValue) * 2 * comparisonTime
+    averageTime += sizeP * sizeQ * sizeM * 2 * comparisonTime
   }
 
   function calculateC() {
@@ -267,6 +276,12 @@ $(document).ready(() => {
         numberOfParallelSubtractions += 2
       }
     }
+    parallelTime += Math.ceil((sizeP * sizeQ) / nValue) * (6 * multiplicationTime + 2 * additionTime + 2 *
+      subtractionTime + 3 * ((sizeM - 1) * multiplicationTime + (sizeM + 1) * subtractionTime) + 2 * ((sizeM - 1) *
+      multiplicationTime) + subtractionTime + additionTime + 2 * comparisonTime)
+    averageTime += sizeP * sizeQ * (6 * multiplicationTime + 2 * additionTime + 2 *
+      subtractionTime + 3 * ((sizeM - 1) * multiplicationTime + (sizeM + 1) * subtractionTime) + 2 * ((sizeM - 1) *
+      multiplicationTime) + subtractionTime + additionTime + 2 * comparisonTime)
   }
 
   function drawGraphics() {
