@@ -27,7 +27,9 @@ $(document).ready(() => {
     numberOfParallelSubtractions = 0,
     consistentTime = 0,
     parallelTime = 0,
-    averageTime = 0
+    averageTime = 0,
+    averageLength = 0,
+    discrepancy = 0
 
   google.charts.load('current', {packages: ['corechart', 'line']})
   google.charts.setOnLoadCallback(drawGraphics)
@@ -123,11 +125,8 @@ $(document).ready(() => {
     drawMatrix(g, $('#g-matrix'))
     drawMatrix(c, $('#c-matrix'))
 
-    let averageLength = Math.ceil(averageTime / rang)
-
     $('#result-multiplication-time').text(numberOfMultiplications * multiplicationTime)
-    $('#result-addition-time').text(numberOfAdditions * additi
-      onTime)
+    $('#result-addition-time').text(numberOfAdditions * additionTime)
     $('#result-subtraction-time').text(numberOfSubtractions * subtractionTime)
     $('#result-comparison-time').text(numberOfComparisons * comparisonTime)
     $('#result-acceleration-factor').text(accelerationFactor.toFixed(3))
@@ -137,7 +136,7 @@ $(document).ready(() => {
     $('#result-consistent-time').text(consistentTime)
     $('#result-total-length').text(parallelTime)
     $('#result-average-length').text(averageLength)
-    $('#result-discrepancy').text((parallelTime / averageLength).toFixed(3))
+    $('#result-discrepancy').text(discrepancy)
   }
 
   function drawMatrix(matrix, table) {
@@ -226,6 +225,8 @@ $(document).ready(() => {
       multiplicationTime + numberOfParallelAdditions * additionTime + numberOfParallelSubtractions * subtractionTime
     accelerationFactor = consistentTime / parallelTime
     efficiency = consistentTime / (parallelTime * nValue)
+    averageLength = Math.ceil(averageTime / rang)
+    discrepancy = parseFloat((parallelTime / averageLength).toFixed(3))
   }
 
   function calculateF() {
@@ -294,19 +295,19 @@ $(document).ready(() => {
       calculate(1, 1, 1, i)
       KyN1.push(accelerationFactor)
       En1.push(efficiency)
-      Dn1.push(rang)
+      Dn1.push(discrepancy)
       calculate(2, 1, 1, i)
       KyN2.push(accelerationFactor)
       En2.push(efficiency)
-      Dn2.push(rang)
+      Dn2.push(discrepancy)
       calculate(3, 1, 1, i)
       KyN3.push(accelerationFactor)
       En3.push(efficiency)
-      Dn3.push(rang)
+      Dn3.push(discrepancy)
       calculate(4, 1, 1, i)
       KyN4.push(accelerationFactor)
       En4.push(efficiency)
-      Dn4.push(rang)
+      Dn4.push(discrepancy)
 
       KyN.push([i, KyN1[i - 1], KyN2[i - 1], KyN3[i - 1], KyN4[i - 1]])
       En.push([i, En1[i - 1], En2[i - 1], En3[i - 1], En4[i - 1]])
@@ -315,19 +316,19 @@ $(document).ready(() => {
       calculate(i, 1, 1, 1)
       KyR1.push(accelerationFactor)
       Er1.push(efficiency)
-      Dr1.push(rang)
+      Dr1.push(discrepancy)
       calculate(i, 1, 1, 2)
       KyR2.push(accelerationFactor)
       Er2.push(efficiency)
-      Dr2.push(rang)
+      Dr2.push(discrepancy)
       calculate(i, 1, 1, 3)
       KyR3.push(accelerationFactor)
       Er3.push(efficiency)
-      Dr3.push(rang)
+      Dr3.push(discrepancy)
       calculate(i, 1, 1, 4)
       KyR4.push(accelerationFactor)
       Er4.push(efficiency)
-      Dr4.push(rang)
+      Dr4.push(discrepancy)
 
       KyR.push([i, KyR1[i - 1], KyR2[i - 1], KyR3[i - 1], KyR4[i - 1]])
       Er.push([i, Er1[i - 1], Er2[i - 1], Er3[i - 1], Er4[i - 1]])
