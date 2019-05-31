@@ -4,7 +4,7 @@
 Вариант задания № 11.
 
 Для упрощения реализации таблиц и динамической отрисовки элементов страницы
-была использована билиотека jQuery.
+была использована билиотека jQuery. Для построения графиков был использован Google charts API
 */
 
 $(document).ready(() => {
@@ -22,9 +22,6 @@ $(document).ready(() => {
     numberOfAdditions = 0,
     numberOfSubtractions = 0,
     numberOfComparisons = 0,
-    numberOfParallelMultiplications = 0,
-    numberOfParallelAdditions = 0,
-    numberOfParallelSubtractions = 0,
     consistentTime = 0,
     parallelTime = 0,
     averageTime = 0,
@@ -207,9 +204,6 @@ $(document).ready(() => {
     numberOfAdditions = 0
     numberOfSubtractions = 0
     numberOfComparisons = 0
-    numberOfParallelMultiplications = 0
-    numberOfParallelAdditions = 0
-    numberOfParallelSubtractions = 0
     parallelTime = 0
     consistentTime = 0
     averageTime = 0
@@ -221,8 +215,7 @@ $(document).ready(() => {
 
     rang = sizeM * sizeP * sizeQ
     consistentTime = numberOfMultiplications * multiplicationTime + numberOfAdditions * additionTime +
-      numberOfSubtractions * subtractionTime + numberOfComparisons * comparisonTime + numberOfParallelMultiplications *
-      multiplicationTime + numberOfParallelAdditions * additionTime + numberOfParallelSubtractions * subtractionTime
+      numberOfSubtractions * subtractionTime + numberOfComparisons * comparisonTime
     accelerationFactor = consistentTime / parallelTime
     efficiency = consistentTime / (parallelTime * nValue)
     averageLength = Math.ceil(averageTime / rang)
@@ -239,9 +232,9 @@ $(document).ready(() => {
               1 + (4 * reduction(a[i][k], b[k][j]) - 2) * e[0][k]
             ) * (1 - e[0][k])
           ).toFixed(3)
-          numberOfParallelMultiplications += 7
-          numberOfParallelAdditions += 2
-          numberOfParallelSubtractions += 3
+          numberOfMultiplications += 7
+          numberOfAdditions += 2
+          numberOfSubtractions += 3
         }
       }
     }
@@ -272,9 +265,9 @@ $(document).ready(() => {
             singleDisjunction(d[i][j])) * g[i][j])
           ) * (1 - g[i][j])
         ).toFixed(3)
-        numberOfParallelMultiplications += 6
-        numberOfParallelAdditions += 2
-        numberOfParallelSubtractions += 2
+        numberOfMultiplications += 6
+        numberOfAdditions += 2
+        numberOfSubtractions += 2
       }
     }
     parallelTime += Math.ceil((sizeP * sizeQ) / nValue) * (6 * multiplicationTime + 2 * additionTime + 2 *
