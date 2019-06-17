@@ -358,7 +358,3 @@ $(document).ready(() => {
     chart.draw(data, options)
   }
 })
-
-// Lsum = Tn
-// Lavg = T1 / r
-// D = Lsum / Lavg
